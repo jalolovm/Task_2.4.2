@@ -11,11 +11,15 @@
     <tr>
         <th>id</th>
         <th>Name</th>
+        <th>Surname</th>
+        <th>Age</th>
     </tr>
 
     <tr th:each="user: ${users}">
         <td th:utext="${user.getId()}">id</td>
         <td th:utext="${user.getName()}">name</td>
+        <td th:utext="${user.getSurname()}">surname</td>
+        <td th:utext="${user.getAge()}">age</td>
         <td><a th:href="@{users/{id}/edit(id=${user.getId()})}">Update</a></td>
         <td><a th:href="@{users/delete/{id}(id=${user.getId()})}">Delete</a></td>
     </tr>
