@@ -1,7 +1,6 @@
 package ru.jalolov.webCRUD.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,14 +23,7 @@ public class UsersController {
     public String index(Model model) {
         model.addAttribute("users", userService.index());
 
-        return "users/index";
-    }
-
-    @GetMapping("/{id}")
-    public String show(@PathVariable("id") int id, Model model) {
-        model.addAttribute("user", userService.show(id));
-        // получим одного человека по его id из dao и передадим этого человека на представление
-        return "users/show";
+        return "users/user-list";
     }
 
     @GetMapping("/new")
@@ -58,7 +50,7 @@ public class UsersController {
         return "redirect:/users";
     }
 
-    @DeleteMapping("/{id}")
+    @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") int id){
         userService.delete(id);
         return "redirect:/users";
