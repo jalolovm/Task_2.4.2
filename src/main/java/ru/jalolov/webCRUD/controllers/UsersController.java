@@ -22,7 +22,6 @@ public class UsersController {
     @GetMapping()
     public String index(Model model) {
         model.addAttribute("users", userService.index());
-
         return "users/user-list";
     }
 
