@@ -1,7 +1,6 @@
 package ru.jalolov.webCRUD.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.jalolov.webCRUD.dao.UserDAO;
@@ -12,10 +11,10 @@ import java.util.List;
 
 @Service
 @Transactional
-public class UserServiceImpl{
+public class UserServiceImpl implements UserService{
 
     @Autowired
-    private UserDAOImpl userDAO;
+    private UserDAO userDAO;
 
     public List<User> index() {
         return userDAO.index();

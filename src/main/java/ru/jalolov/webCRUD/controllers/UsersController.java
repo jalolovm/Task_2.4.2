@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.jalolov.webCRUD.models.User;
+import ru.jalolov.webCRUD.service.UserService;
 import ru.jalolov.webCRUD.service.UserServiceImpl;
 
 @Controller
@@ -12,10 +13,10 @@ import ru.jalolov.webCRUD.service.UserServiceImpl;
 public class UsersController {
 
 
-    private final UserServiceImpl userService;
+    private final UserService userService;
 
     @Autowired
-    public UsersController(UserServiceImpl userService) {
+    public UsersController(UserService userService) {
         this.userService = userService;
     }
 
