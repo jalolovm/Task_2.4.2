@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.jalolov.webCRUD.models.User;
 import ru.jalolov.webCRUD.service.UserService;
-import ru.jalolov.webCRUD.service.UserServiceImpl;
 
 @Controller
 @RequestMapping("/users")
