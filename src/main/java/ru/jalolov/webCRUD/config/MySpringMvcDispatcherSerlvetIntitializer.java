@@ -1,10 +1,6 @@
 package ru.jalolov.webCRUD.config;
 
-import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
-
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 
 public class MySpringMvcDispatcherSerlvetIntitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
@@ -22,13 +18,5 @@ public class MySpringMvcDispatcherSerlvetIntitializer extends AbstractAnnotation
         return new String[] {"/"};
     }
 
-    @Override
-    public void onStartup(ServletContext servletContext) throws ServletException {
-        super.onStartup(servletContext);
-        filterByHttp(servletContext);
-    }
 
-    private void filterByHttp(ServletContext context){
-        context.addFilter("hiddenHttpMethodFilter", new HiddenHttpMethodFilter()).addMappingForUrlPatterns(null, true, "/*");
-    }
 }
