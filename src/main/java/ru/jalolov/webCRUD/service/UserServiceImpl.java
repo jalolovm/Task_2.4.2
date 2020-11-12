@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
         return userDAO.show(id);
     }
 
-    public void save(User user) {
+    public void save(User user) throws Exception {
         userDAO.save(user);
     }
 
@@ -35,6 +35,10 @@ public class UserServiceImpl implements UserService {
 
     public void delete(int id) {
         userDAO.delete(id);
+    }
+
+    public User findByName(String name) {
+        return userDAO.findByName(name);
     }
 
     @Override

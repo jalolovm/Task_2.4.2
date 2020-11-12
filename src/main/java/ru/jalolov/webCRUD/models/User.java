@@ -19,10 +19,7 @@ public class User implements UserDetails {
     private int id;
 
     @Column (name = "name", nullable = false)
-    private String name;
-
-    @Column (name = "surname", nullable = false)
-    private String surname;
+    private String username;
 
     @Column (name = "age", nullable = false)
     private int age;
@@ -33,14 +30,13 @@ public class User implements UserDetails {
     @Transient
     private String passwordConfirm;
 
-    @ManyToMany()
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "userId"),
             inverseJoinColumns = @JoinColumn(name = "roleId"))
     private Set<Role> roles;
 
-    public User(String name, String surname, int age) {
-        this.name = name;
-        this.surname = surname;
+    public User(String username, int age) {
+        this.username = username;
         this.age = age;
     }
 
@@ -55,20 +51,8 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setUsername(String name) {
+        this.username = name;
     }
 
     public int getAge() {
@@ -111,7 +95,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return name;
+        return username;
     }
 
     @Override
@@ -132,5 +116,18 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        roles.forEach(r -> stringBuilder.append(", " + r.getRole()));
+
+        stringBuilder.deleteCharAt(0);
+
+        return "Username: " + username +
+                ", age:" + age +
+                ", roles: " + stringBuilder +
+                '}';
     }
 }
