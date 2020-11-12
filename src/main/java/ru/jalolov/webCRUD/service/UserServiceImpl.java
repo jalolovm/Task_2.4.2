@@ -1,6 +1,8 @@
 package ru.jalolov.webCRUD.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.jalolov.webCRUD.dao.UserDAO;
@@ -33,5 +35,15 @@ public class UserServiceImpl implements UserService {
 
     public void delete(int id) {
         userDAO.delete(id);
+    }
+
+    @Override
+    @Transactional
+    public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
+        User user = userDAO.findByName(name);
+        if(user==null){
+            throw new UsernameNotFoundException("User doesn't exists");
+        }
+        return user;
     }
 }

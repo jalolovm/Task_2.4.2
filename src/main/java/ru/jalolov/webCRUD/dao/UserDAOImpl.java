@@ -46,4 +46,13 @@ public class UserDAOImpl implements UserDAO {
         User deleteUser = show(id);
         entityManager.remove(deleteUser);
     }
+
+    @Override
+    public User findByName(String name) {
+
+        TypedQuery<User> query = entityManager.createQuery(
+                "select u from User u where u.name = :name", User.class);
+        query.setParameter("name", name);
+        return query.getResultList().stream().findAny().orElse(null);
+    }
 }
