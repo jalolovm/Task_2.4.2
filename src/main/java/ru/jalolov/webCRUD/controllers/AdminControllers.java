@@ -52,4 +52,11 @@ public class AdminControllers {
         userService.delete(id);
         return "redirect:/admin";
     }
+
+    @GetMapping("/{id}")
+    public String showById(@PathVariable("id") int id, Model model){
+        User user = userService.show(id);
+        model.addAttribute("user", user);
+        return "users/user";
+    }
 }

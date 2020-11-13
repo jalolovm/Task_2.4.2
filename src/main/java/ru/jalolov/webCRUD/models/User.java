@@ -126,8 +126,7 @@ public class User implements UserDetails {
         stringBuilder.deleteCharAt(0);
 
         return "Username: " + username +
-                ", age:" + age +
-                ", roles: " + stringBuilder +
-                '}';
+                "\n age:" + age +
+                "\n roles: " + stringBuilder;
     }
 }

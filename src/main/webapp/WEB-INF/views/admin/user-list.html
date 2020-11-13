@@ -18,6 +18,7 @@
         <td th:utext="${user.getId()}">id</td>
         <td th:utext="${user.getUsername()}">name</td>
         <td th:utext="${user.getAge()}">age</td>
+        <td><a th:href="@{admin/{id}(id=${user.getId()})}">Full information</a></td>
         <td><a th:href="@{admin/{id}/edit(id=${user.getId()})}">Update</a></td>
         <td><a th:href="@{admin/delete/{id}(id=${user.getId()})}">Delete</a></td>
     </tr>
