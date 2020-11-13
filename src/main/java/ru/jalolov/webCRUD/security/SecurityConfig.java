@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -24,19 +25,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
         http
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/user").access("hasRole('ROLE_USER')")
+                .antMatchers("/users").access("hasRole('ROLE_USER')")
                 .antMatchers("/admin").access("hasAnyRole('ROLE_ADMIN')")
                 .and()
                 .formLogin()
                 .successHandler(successUserHandler)
                 .and()
-                .logout()
-                .logoutSuccessUrl("/");
-
+                .logout().permitAll();
 
     }
 
