@@ -15,12 +15,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
-    private final SuccessUserHandler successUserHandler;
+    private final LoginSuccessHandler loginSuccessHandler;
 
     @Autowired
-    public SecurityConfig(UserDetailsService userDetailsService, SuccessUserHandler successUserHandler) {
+    public SecurityConfig(UserDetailsService userDetailsService, LoginSuccessHandler loginSuccessHandler) {
         this.userDetailsService = userDetailsService;
-        this.successUserHandler = successUserHandler;
+        this.loginSuccessHandler = loginSuccessHandler;
     }
 
     @Override
@@ -34,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin").access("hasAnyRole('ROLE_ADMIN')")
                 .and()
                 .formLogin()
-                .successHandler(successUserHandler)
+                .successHandler(loginSuccessHandler)
                 .and()
                 .logout().permitAll();
 
