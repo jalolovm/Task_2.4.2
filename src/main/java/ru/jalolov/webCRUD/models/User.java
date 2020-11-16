@@ -108,15 +108,19 @@ public class User implements UserDetails {
         return true;
     }
 
-    @Override
-    public String toString() {
+    public String getRoleString(){
         StringBuilder stringBuilder = new StringBuilder();
         roles.forEach(r -> stringBuilder.append(", " + r.getRole()));
 
         stringBuilder.deleteCharAt(0);
+        return stringBuilder.toString();
+    }
+
+    @Override
+    public String toString() {
 
         return "Username: " + username +
                 "\n age:" + age +
-                "\n roles: " + stringBuilder;
+                "\n roles: " + getRoleString();
     }
 }

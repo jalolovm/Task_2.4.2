@@ -12,12 +12,14 @@
         <th>id</th>
         <th>Name</th>
         <th>Age</th>
+        <th>Roles</th>
     </tr>
 
     <tr th:each="user: ${users}">    <!--Здесь нужно исправить поля-->
         <td th:utext="${user.getId()}">id</td>
         <td th:utext="${user.getUsername()}">name</td>
         <td th:utext="${user.getAge()}">age</td>
+        <td th:utext="${user.getRoleString()}">roles</td>
         <td><a th:href="@{admin/{id}(id=${user.getId()})}">Full information</a></td>
         <td><a th:href="@{admin/{id}/edit(id=${user.getId()})}">Update</a></td>
         <td><a th:href="@{admin/delete/{id}(id=${user.getId()})}">Delete</a></td>
