@@ -38,10 +38,8 @@ public class UserDAOImpl implements UserDAO {
     public void save(User user) throws Exception {
         User userExist = findByName(user.getUsername());
         if (userExist != null){
-            throw new Exception("ПОЛЬЗОВАТЕЛЬ С ТАКИМ ИМЕНЕМ УЖЕ ЕСТЬ");
+            throw new Exception("ПОЛЬЗОВАТЕЛЬ С ТАКИМ ИМЕНЕМ УЖЕ СУЩЕСТВУЕТ");
         }
-
-        user.setRoles(Set.of(new Role(1L, "ROLE_USER")));
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         entityManager.persist(user);
     }

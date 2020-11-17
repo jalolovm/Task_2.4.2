@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "users")
@@ -69,8 +70,13 @@ public class User implements UserDetails {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setRoles(String role) {
+        if(role.equals("ADMIN")){
+            this.roles = Set.of(new Role(1L, "ROLE_USER"),
+                                new Role(2L, "ROLE_ADMIN"));
+        } else if (role.equals("USER")){
+            this.roles = Set.of(new Role(1L, "ROLE_USER"));
+        }
     }
 
     @Override
@@ -109,11 +115,15 @@ public class User implements UserDetails {
     }
 
     public String getRoleString(){
-        StringBuilder stringBuilder = new StringBuilder();
-        roles.forEach(r -> stringBuilder.append(", " + r.getRole()));
+        Set<String> roles = getRoles().stream()
+                .map(role -> role.getRole())
+                .collect(Collectors.toSet());
 
-        stringBuilder.deleteCharAt(0);
-        return stringBuilder.toString();
+        if(roles.contains("ROLE_ADMIN")){
+            return "ADMIN";
+        } else {
+            return "USER";
+        }
     }
 
     @Override

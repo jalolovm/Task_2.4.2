@@ -11,11 +11,18 @@
     <label for="name">Name</label>
     <input type="text" th:field="*{username}" id="name"/>
     <br/>
+
     <label for="age">Age</label>
     <input type="text" th:field="*{age}" id="age"/>
     <br/>
     <label for="password">Password</label>
     <input type="text" th:field="*{password}" id="password">
+    <br/>
+<!--    <label for="role">Role</label>-->
+<!--    <input type="text" th:field="*{roles}" id="role">-->
+    <p><input type="radio" th:field="*{roles}" th:value="USER">USER</p>
+    <p><input type="radio" th:field="*{roles}" th:value="ADMIN">ADMIN</p>
+
     <input type="submit" value="OK"/>
 </form>
 
