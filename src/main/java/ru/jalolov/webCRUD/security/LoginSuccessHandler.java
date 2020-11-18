@@ -19,7 +19,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
                                         Authentication authentication) throws IOException {
         Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
 
-        if (roles.contains("ROLE_USER") && !roles.contains("ROLE_ADMIN")) { // надо переопределить этот метод, так как роль User есть и у админа, из-за этого оба прилетают на одну и ту же страницу
+        if (roles.contains("ROLE_USER") && !roles.contains("ROLE_ADMIN")) {
             httpServletResponse.sendRedirect("/users");
         } else if (roles.contains("ROLE_ADMIN")){
             httpServletResponse.sendRedirect("/admin");

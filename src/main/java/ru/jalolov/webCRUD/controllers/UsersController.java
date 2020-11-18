@@ -21,7 +21,7 @@ public class UsersController {
     }
 
     @GetMapping()
-    public String show(Principal principal, Model model) {  // сделать через принципал
+    public String show(Principal principal, Model model) {
         User user = userService.findByName(principal.getName());
         model.addAttribute("user", user);
         return "users/user";

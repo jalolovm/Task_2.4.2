@@ -15,7 +15,7 @@
         <th>Roles</th>
     </tr>
 
-    <tr th:each="user: ${users}">    <!--Здесь нужно исправить поля-->
+    <tr th:each="user: ${users}">
         <td th:utext="${user.getId()}">id</td>
         <td th:utext="${user.getUsername()}">name</td>
         <td th:utext="${user.getAge()}">age</td>
