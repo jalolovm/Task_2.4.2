@@ -40,10 +40,10 @@ public class AdminControllers {
                          ,@RequestParam(value = "roles", required = false) String[] roles) throws Exception {
 
         List<String> rolesList = Arrays.asList(roles);
-        if (rolesList.contains("ADMIN")){
+        if (rolesList.contains("ROLE_ADMIN")){
             user.setRoles(Set.of(new Role(2L, "ROLE_ADMIN"),
                                  new Role(1L, "ROLE_USER")));
-        } else if ((rolesList.contains("USER"))){
+        } else if ((rolesList.contains("ROLE_USER"))){
             user.setRoles(Set.of(new Role(1L, "ROLE_USER")));
         }
         userService.save(user);
