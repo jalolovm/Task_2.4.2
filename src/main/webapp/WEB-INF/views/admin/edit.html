@@ -16,8 +16,10 @@
     <input type="text" th:field="*{age}" id="age"/>
     <br/>
 
-<!--    <p><input type="radio" th:field="*{roles}" th:value="USER">USER</p>-->
-<!--    <p><input type="radio" th:field="*{roles}" th:value="ADMIN">ADMIN</p>-->
+    <p><select size="2" multiple name="roles_arr">
+        <option value="ROLE_USER">USER</option>
+        <option value="ROLE_ADMIN">ADMIN</option>
+    </select></p>
 
     <input type="submit" value="Update"/>
 </form>

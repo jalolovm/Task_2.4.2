@@ -36,8 +36,8 @@ public class AdminControllers {
     }
 
     @PostMapping()
-    public String create(@ModelAttribute("user") User user
-                         ,@RequestParam(value = "roles", required = false) String[] roles) throws Exception {
+    public String create(@ModelAttribute("user") User user,
+                         @RequestParam(value = "roles_arr", required = false) String[] roles) throws Exception {
 
         List<String> rolesList = Arrays.asList(roles);
         if (rolesList.contains("ROLE_ADMIN")){
@@ -57,7 +57,17 @@ public class AdminControllers {
     }
 
     @PostMapping("/{id}")
-    public String update(@ModelAttribute("user") User user, @PathVariable("id") int id) {
+    public String update(@ModelAttribute("user") User user, @PathVariable("id") int id,
+                         @RequestParam(value = "roles_arr", required = false) String[] roles) {
+
+        List<String> rolesList = Arrays.asList(roles);
+        if (rolesList.contains("ROLE_ADMIN")){
+            user.setRoles(Set.of(new Role(2L, "ROLE_ADMIN"),
+                    new Role(1L, "ROLE_USER")));
+        } else if ((rolesList.contains("ROLE_USER"))){
+            user.setRoles(Set.of(new Role(1L, "ROLE_USER")));
+        }
+
         userService.update(id, user);
         return "redirect:/admin";
     }
