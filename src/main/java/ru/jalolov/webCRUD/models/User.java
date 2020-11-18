@@ -70,13 +70,8 @@ public class User implements UserDetails {
         return roles;
     }
 
-    public void setRoles(String role) {
-        if(role.equals("ADMIN")){
-            this.roles = Set.of(new Role(1L, "ROLE_USER"),
-                                new Role(2L, "ROLE_ADMIN"));
-        } else if (role.equals("USER")){
-            this.roles = Set.of(new Role(1L, "ROLE_USER"));
-        }
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     @Override

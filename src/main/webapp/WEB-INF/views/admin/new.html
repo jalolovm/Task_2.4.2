@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<form th:method="POST" th:action="@{/admin}" th:object="${user}"> <!--Здесь нужно исправить поля-->
+<form th:method="POST" th:action="@{/admin}" th:object="${user}">
     <label for="name">Name</label>
     <input type="text" th:field="*{username}" id="name"/>
     <br/>
@@ -18,10 +18,12 @@
     <label for="password">Password</label>
     <input type="text" th:field="*{password}" id="password">
     <br/>
-<!--    <label for="role">Role</label>-->
-<!--    <input type="text" th:field="*{roles}" id="role">-->
-    <p><input type="radio" th:field="*{roles}" th:value="USER">USER</p>
-    <p><input type="radio" th:field="*{roles}" th:value="ADMIN">ADMIN</p>
+
+
+    <p><select size="2" multiple name="roles">
+        <option value="ROLE_USER">USER</option>
+        <option value="ROLE_ADMIN">ADMIN</option>
+    </select></p>
 
     <input type="submit" value="OK"/>
 </form>

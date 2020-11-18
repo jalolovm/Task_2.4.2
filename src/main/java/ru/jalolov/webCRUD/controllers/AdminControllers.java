@@ -4,8 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.jalolov.webCRUD.models.Role;
 import ru.jalolov.webCRUD.models.User;
 import ru.jalolov.webCRUD.service.UserService;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Stream;
 
 @Controller
 @RequestMapping("/admin")
@@ -30,9 +36,18 @@ public class AdminControllers {
     }
 
     @PostMapping()
-    public String create(@ModelAttribute("user") User user) throws Exception {
+    public String create(@ModelAttribute("user") User user
+                         ,@RequestParam(value = "roles", required = false) String[] roles) throws Exception {
+
+        List<String> rolesList = Arrays.asList(roles);
+        if (rolesList.contains("ADMIN")){
+            user.setRoles(Set.of(new Role(2L, "ROLE_ADMIN"),
+                                 new Role(1L, "ROLE_USER")));
+        } else if ((rolesList.contains("USER"))){
+            user.setRoles(Set.of(new Role(1L, "ROLE_USER")));
+        }
         userService.save(user);
-        return "redirect:/admin"; // испавить путь
+        return "redirect:/admin";
     }
 
     @GetMapping("/{id}/edit")
