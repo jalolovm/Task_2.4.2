@@ -3,14 +3,13 @@ package ru.jalolov.webCRUD.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
-import ru.jalolov.webCRUD.models.Role;
 import ru.jalolov.webCRUD.models.User;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
-import java.util.Set;
 
 @Repository
 public class UserDAOImpl implements UserDAO {
@@ -19,7 +18,7 @@ public class UserDAOImpl implements UserDAO {
     private EntityManager entityManager;
 
     @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
+    PasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public List<User> index() {
@@ -45,11 +44,8 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public void update(int id, User user) {
-        User updateUser = show(id);
-        updateUser.setUsername(user.getUsername());
-        updateUser.setAge(user.getAge());
-        updateUser.setRoles(user.getRoles());
+    public void update(User user) {
+        entityManager.merge(user);
     }
 
     @Override

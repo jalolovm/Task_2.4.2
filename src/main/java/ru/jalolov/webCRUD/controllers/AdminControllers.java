@@ -11,7 +11,6 @@ import ru.jalolov.webCRUD.service.UserService;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Stream;
 
 @Controller
 @RequestMapping("/admin")
@@ -58,7 +57,7 @@ public class AdminControllers {
 
     @PostMapping("/{id}")
     public String update(@ModelAttribute("user") User user, @PathVariable("id") int id,
-                         @RequestParam(value = "roles_arr", required = false) String[] roles) {
+                         @RequestParam(value = "roles_arr", defaultValue = "ROLE_USER") String[] roles) {
 
         List<String> rolesList = Arrays.asList(roles);
         if (rolesList.contains("ROLE_ADMIN")){
@@ -68,7 +67,7 @@ public class AdminControllers {
             user.setRoles(Set.of(new Role(1L, "ROLE_USER")));
         }
 
-        userService.update(id, user);
+        userService.update(user);
         return "redirect:/admin";
     }
 
